@@ -17,6 +17,6 @@ namespace GradeBook
         }
 
         List<double> grades;
-        private string name;
+        string name;
     }
 }
