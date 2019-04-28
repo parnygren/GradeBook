@@ -8,12 +8,12 @@ namespace GradeBook.Tests
         [Fact]
         public void ValueTypesAlsoPassByValue() {
             var x = GetInt();
-            SetInt(x);
+            SetInt(ref x);
 
-            Assert.Equal(3, x);
+            Assert.Equal(42, x);
         }
 
-        private void SetInt(int x)
+        private void SetInt(ref int x)
         {
             x = 42;
         }
