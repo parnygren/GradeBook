@@ -3,8 +3,35 @@ using Xunit;
 
 namespace GradeBook.Tests
 {
+    public delegate string WriteLogDelegate(string logMessage);
+
     public class TypeTests
     {
+        int count = 0;
+        
+        [Fact]
+        public void WriteLogDelegateCanPointToMethod()
+        {
+            WriteLogDelegate log = ReturnMessage;
+            log += ReturnMessage;
+            log += IncrementCount;
+
+            var result = log("Hello!");
+            Assert.Equal(3, count);
+        }
+
+        string IncrementCount(string message)
+        {
+            count++;
+            return message.ToLower();
+        }
+
+        string ReturnMessage(string message)
+        {
+            count++;
+            return message;
+        }
+
         [Fact]
         public void ValueTypesAlsoPassByValue()
         {
@@ -67,10 +94,11 @@ namespace GradeBook.Tests
         }
 
         [Fact]
-        public void StringsBehaveLikeValueTypes() {
+        public void StringsBehaveLikeValueTypes()
+        {
             string name = "Pär";
             var upper = MakeUppercase(name);
-            
+
             Assert.Equal("Pär", name);
             Assert.Equal("PÄR", name);
         }
