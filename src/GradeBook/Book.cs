@@ -17,7 +17,8 @@ namespace GradeBook
             {
                 grades.Add(grade);
             }
-            else {
+            else
+            {
                 Console.WriteLine("Invalid value");
             }
         }
@@ -29,18 +30,21 @@ namespace GradeBook
             result.Low = double.MaxValue;
             result.High = double.MinValue;
 
-            foreach (var grade in grades)
+            var index = 0;
+            while (index < grades.Count)
             {
-                result.Low = Math.Min(grade, result.Low);
-                result.High = Math.Max(grade, result.High);
-                result.Average += grade;
+                result.Low = Math.Min(grades[index], result.Low);
+                result.High = Math.Max(grades[index], result.High);
+                result.Average += grades[index];
+                index += 1;
             }
             result.Average /= grades.Count;
 
             return result;
         }
 
-        public List<double> Grades {
+        public List<double> Grades
+        {
             get { return grades; }
         }
 
