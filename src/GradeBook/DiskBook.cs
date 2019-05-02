@@ -25,7 +25,18 @@ namespace GradeBook
 
         public override Statistics GetStatistics()
         {
-            throw new System.NotImplementedException();
+            var result = new Statistics();
+            using(var reader = File.OpenText($"{Name}.txt"))
+            {
+                var line = reader.ReadLine();
+                while(line != null)
+                {
+                    var number = double.Parse(line);
+                    result.Add(number);
+                    line = reader.ReadLine();
+                }
+            }
+            return result;
         }
     }
 }
